@@ -1,0 +1,70 @@
+d1 $ n (slow 3 "<c4'maj7 e4'min7 g4'maj7 b4'min7>")
+  # sound "superpiano"
+  # room 0.9
+  # sz 0.95
+  # gain 0.6
+  # pan (slow 8 $ range (-3) 3 sine)
+  # lpf 1500
+
+
+d2 $ stack [
+  n (slow 3 "<c4'maj7 e4'min7 g4'maj9 b4'min9>")
+    # sound "supersquare"
+    # gain 0.3
+    # pan (slow 2 $ range (-1) 1 sine),
+  s "supersquare"
+    # speed (slow 2 $ range 0.98 1.02 sine)
+    # delay (slow 5 $ range 0.5 0.9 sine)
+    # room 3
+    # sz 0.95
+    # lpf 1500
+]
+
+
+d3 $ s "birds*8"
+  # n (irand 10)
+  # pan rand
+  # lpf 2000
+  # hpf 400
+  # dry 15
+  # gain 0.5
+  #room 0.2
+
+
+d4 $ stack [
+  n (irand 16) # sound "bd sn"
+    # speed (range 0.8 1.2 $ slow 3 sine)
+    # gain (range 0.6 1 $ slow 4 sine)
+    # pan (slow 5 $ range (-0.5) 0.5 sine),
+
+   sometimesBy 0.5 (|+| speed "-1") $ s "hh*8"
+    # speed (range 0.8 1.5 $ slow 2 sine)
+    # gain (range 0.4 0.8 $ slow 3 sine)
+    # pan (slow 6 $ range (-1) 1 sine),
+
+   s "<perc*2 ~ perc(3,8)>"
+    # delay (range 0.3 0.7 $ slow 4 sine)
+    # crush (range 2 8 $ slow 3 sine)
+    # gain (range 0.5 0.7 $ slow 5 sine)
+    # pan (slow 7 $ range (-0.8) 0.8 sine),
+
+   sometimesBy 0.3 (\x -> x # sound "sd*2") $ s "[sn bd]"
+    # speed (irand 4)
+    # gain (range 0.3 0.8 $ slow 2 sine)
+    # pan (slow 4 $ range (-0.6) 0.6 sine)
+]
+
+d5 $ s "glitch*8"
+  # crush (range 2 8 $ slow 4 sine)
+  # speed (range 0.5 1.5 $ slow 3 saw)
+  # pan (slow 3 $ range (-1) 1 saw)
+  #gain 0.5
+
+d6 $ s "river"
+  # gain 0.7
+  #room 0.2
+
+
+hush
+
+d2 silence
